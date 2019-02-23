@@ -9,7 +9,10 @@
 #
 # See gitignore(5) man page for more details
 #
-/config.php
+
+# Our config.php contains no environment variables, and hardwires the SC theme, so include in the repo
+# /config.php
+
 /lib/editor/tinymce/extra/tools/temp/
 *~
 *.swp
