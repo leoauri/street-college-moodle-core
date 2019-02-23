@@ -18,8 +18,10 @@
 [._]sw[a-p]
 # Temporary files including undo
 *~
-#
-/config.php
+
+# Our config.php contains no environment variables, and hardwires the SC theme, so include in the repo
+# /config.php
+
 /lib/editor/tinymce/extra/tools/temp/
 /tags
 /TAGS
