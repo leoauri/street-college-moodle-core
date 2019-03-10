@@ -34,11 +34,6 @@ $CFG->debugstringids = 1; // Add strings=1 to url to get string ids.
 $CFG->perfdebug = 15;
 $CFG->debugpageinfo = 1;
 
-// Hardwire Street College theme settings
-$CFG->theme = 'street_college';
-$CFG->themelist = 'street_college';
-$CFG->allowthemechangeonurl = false;
-
 $CFG->passwordpolicy = 0;
 
 $CFG->phpunit_dataroot  = '/var/www/phpunitdata';
@@ -86,5 +81,28 @@ if (getenv('MOODLE_DOCKER_PHPUNIT_EXTRAS')) {
     define('TEST_ENROL_LDAP_BIND_PW', 'password');
     define('TEST_ENROL_LDAP_DOMAIN', 'ou=Users,dc=openstack,dc=org');
 }
+
+
+// Hardwire Street College theme settings
+$CFG->theme = 'street_college';
+$CFG->themelist = 'street_college';
+$CFG->allowthemechangeonurl = false;
+
+// Hardwire dashboard blocks
+$CFG->forcedefaultmymoodle = true;
+
+$CFG->forced_plugin_settings = [
+    // Unset default end date for courses
+    'moodlecourse' => [
+        'courseenddateenabled' => false
+    ]
+];
+
+// Disable components we're not using
+$CFG->messaging = false;
+$CFG->enableblogs = false;
+$CFG->enablebadges = false;
+$CFG->enableavailability = false;
+
 
 require_once(__DIR__ . '/lib/setup.php');
