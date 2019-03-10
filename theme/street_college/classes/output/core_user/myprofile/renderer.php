@@ -20,7 +20,7 @@ defined('MOODLE_INTERNAL') || die;
 
 class renderer extends \core_user\output\myprofile\renderer {
     public function render(\renderable $widget) {
-        // if widget is tree, replace with our tree and trim categories
+        // if widget is tree, duplicate as our tree (which we can modify) and trim categories
         if (get_class($widget) == 'core_user\output\myprofile\tree') {
             $widgetclone = new tree();
             $widgetclone->duplicate_tree($widget);
