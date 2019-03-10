@@ -24,10 +24,12 @@ class renderer extends \core_user\output\myprofile\renderer {
         if (get_class($widget) == 'core_user\output\myprofile\tree') {
             $widgetclone = new tree();
             $widgetclone->duplicate_tree($widget);
-            $widgetclone->keep_only_categories([
-                'contact',
-                'coursedetails',
-                // 'reports'
+            $widgetclone->remove_categories([
+                'privacyandpolicies',
+                'miscellaneous',
+                'reports',
+                'administration',
+                'loginactivity',
             ]);
             $widget = $widgetclone;
             // print_object($widget->categories);
