@@ -43,4 +43,8 @@ class tree extends \core_user\output\myprofile\tree {
     public function keep_only_categories(array $keep_categories) {    
         $this->categories = array_intersect_key($this->categories, array_flip($keep_categories));
     }
+
+    public function remove_categories(array $to_remove) {
+        $this->categories = array_diff_key($this->categories, array_flip($to_remove));
+    }
 }
