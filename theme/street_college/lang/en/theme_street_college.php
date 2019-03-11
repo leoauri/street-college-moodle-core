@@ -34,3 +34,6 @@ $string['generalsettings'] = 'General settings';
 $string['loginbackgroundimage'] = 'Login page background image';
 $string['loginbackgroundimage_desc'] = 'Background image for the login page.';
 
+// Notes
+$string['usernotes'] = 'User notes';
+$string['newnote'] = 'Take new note';
