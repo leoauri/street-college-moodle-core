@@ -108,11 +108,6 @@ if ($userid && $course->id == SITEID) {
     $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
 
     $PAGE->set_context(context_course::instance($courseid));
-} else {
-    $link = null;
-    if (course_can_view_participants($coursecontext) || course_can_view_participants($systemcontext)) {
-        $link = new moodle_url('/user/index.php', array('id' => $course->id));
-    }
 }
 
 $PAGE->set_pagelayout('incourse');
