@@ -91,7 +91,6 @@ $systemcontext = context_system::instance();
 // Trigger event.
 note_view($coursecontext, $userid);
 
-$strnotes = get_string('notes', 'notes');
 if ($userid && $course->id == SITEID) {
     $PAGE->set_context(context_user::instance($user->id));
     $PAGE->navigation->extend_for_user($user);
@@ -131,6 +130,7 @@ if ($course->id != SITEID) {
     echo $OUTPUT->context_header($headerinfo, 2);
 }
 
+$strnotes = get_string('notes', 'notes');
 echo $OUTPUT->heading($strnotes);
 
 $strsitenotes = get_string('sitenotes', 'notes');
@@ -141,6 +141,7 @@ $straddnewnote = get_string('addnewnote', 'notes');
 echo $OUTPUT->box_start();
 
 if ($courseid != SITEID) {
+    // Print notes for course context view
     $context = context_course::instance($courseid);
     $addid = has_capability('moodle/notes:manage', $context) ? $courseid : 0;
     $view = has_capability('moodle/notes:view', $context);
@@ -173,9 +174,18 @@ if ($courseid != SITEID) {
         $USER->id
     );
 
-} else {  // Normal course.
+} else {  
+    // Not in course context
     $view = has_capability('moodle/notes:view', context_system::instance());
-    note_print_notes('<a name="sitenotes"></a>' . $strsitenotes, 0, $view, 0, $userid, NOTES_STATE_SITE, 0);
+    note_print_notes(
+        '<a name="sitenotes"></a>' . $strsitenotes, 
+        0, 
+        $view, 
+        0, 
+        $userid, 
+        NOTES_STATE_SITE, 
+        0
+    );
     echo '<a name="coursenotes"></a>';
 
     if (!empty($userid)) {
@@ -190,7 +200,15 @@ if ($courseid != SITEID) {
             } else {
                 $addid = 0;
             }
-            note_print_notes($header, $addid, $viewcoursenotes, $c->id, $userid, NOTES_STATE_PUBLIC, 0);
+            note_print_notes(
+                $header, 
+                $addid, 
+                $viewcoursenotes, 
+                $c->id, 
+                $userid, 
+                NOTES_STATE_PUBLIC, 
+                0
+            );
         }
     }
 }
