@@ -122,11 +122,6 @@ if ($course->id == SITEID) {
 
 echo $OUTPUT->header();
 
-if ($course->id != SITEID) {
-    $headerinfo = array('heading' => fullname($user), 'user' => $user);
-    echo $OUTPUT->context_header($headerinfo, 2);
-}
-
 $strnotes = get_string('notes', 'notes');
 echo $OUTPUT->heading($strnotes);
 
