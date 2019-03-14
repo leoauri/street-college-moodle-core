@@ -91,7 +91,8 @@ $systemcontext = context_system::instance();
 // Trigger event.
 note_view($coursecontext, $userid);
 
-if ($userid && $course->id == SITEID) {
+// If we are viewing a user
+if ($userid) {
     $PAGE->set_context(context_user::instance($user->id));
     $PAGE->navigation->extend_for_user($user);
     // If we are looking at our own notes, then change focus to 'my notes'.
@@ -101,6 +102,7 @@ if ($userid && $course->id == SITEID) {
 
     $notesurl = new moodle_url('/notes/index.php', array('user' => $userid));
     $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
+// no user but course context
 } else if ($course->id != SITEID) {
     $notenode = $PAGE->navigation->find('currentcoursenotes', null)->make_inactive();
 
