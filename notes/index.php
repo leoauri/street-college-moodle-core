@@ -86,7 +86,6 @@ if ($course->id == SITEID) {
 }
 
 require_capability('moodle/notes:view', $coursecontext);
-$systemcontext = context_system::instance();
 
 // Trigger event.
 note_view($coursecontext, $userid);
@@ -95,21 +94,19 @@ note_view($coursecontext, $userid);
 if ($userid) {
     $PAGE->set_context(context_user::instance($user->id));
     $PAGE->navigation->extend_for_user($user);
-    // If we are looking at our own notes, then change focus to 'my notes'.
+
+    // If we are looking at our own notes, remove extra weird notes bit.
     if ($userid == $USER->id) {
-        $notenode = $PAGE->navigation->find('notes', null)->make_inactive();
+        $PAGE->navigation->find('notes', null)->make_inactive();
     }
-
-    $notesurl = new moodle_url('/notes/index.php', array('user' => $userid));
-    $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
-// no user but course context
+    
+    // No user but course context
 } else if ($course->id != SITEID) {
-    $notenode = $PAGE->navigation->find('currentcoursenotes', null)->make_inactive();
-
-    $notesurl = new moodle_url('/notes/index.php', array('user' => $userid, 'course' => $courseid));
-    $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
-
     $PAGE->set_context(context_course::instance($courseid));
+
+    // No user or course context
+} else {
+    $PAGE->set_context(context_system::instance());
 }
 
 $PAGE->set_pagelayout('incourse');
