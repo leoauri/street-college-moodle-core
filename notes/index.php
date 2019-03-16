@@ -90,6 +90,8 @@ require_capability('moodle/notes:view', $coursecontext);
 // Trigger event.
 note_view($coursecontext, $userid);
 
+$strnotes = get_string('notes', 'notes');
+
 // If we are viewing a user
 if ($userid) {
     $PAGE->set_context(context_user::instance($user->id));
@@ -98,28 +100,30 @@ if ($userid) {
     // If we are looking at our own notes, remove extra weird notes bit.
     if ($userid == $USER->id) {
         $PAGE->navigation->find('notes', null)->make_inactive();
+    } else {
+        $title[] = fullname($user);
+        $PAGE->set_heading(fullname($user));
     }
     
     // No user but course context
 } else if ($course->id != SITEID) {
     $PAGE->set_context(context_course::instance($courseid));
+    $title[] = $course->shortname;
+    $PAGE->set_heading($course->fullname);
 
     // No user or course context
 } else {
     $PAGE->set_context(context_system::instance());
+    $PAGE->set_heading($strnotes);
 }
 
+$title[] = $strnotes;
+$PAGE->set_title(implode(' | ', $title));
+
 $PAGE->set_pagelayout('incourse');
-$PAGE->set_title($course->fullname);
-if ($course->id == SITEID) {
-    $PAGE->set_heading(fullname($user));
-} else {
-    $PAGE->set_heading($course->fullname);
-}
 
 echo $OUTPUT->header();
 
-$strnotes = get_string('notes', 'notes');
 echo $OUTPUT->heading($strnotes);
 
 $strsitenotes = get_string('sitenotes', 'notes');
