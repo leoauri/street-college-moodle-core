@@ -30,6 +30,7 @@ class renderer extends \core_user\output\myprofile\renderer {
                 'reports',
                 'administration',
                 'loginactivity',
+                'coursedetails',
             ]);
             $widget = $widgetclone;
             // print_object($widget->categories);
