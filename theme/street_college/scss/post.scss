@@ -18,3 +18,9 @@ body.pagelayout-login {
     background-image: url([[pix:theme|Street_College_Logo_rgb_shadow_transp]]);                                                                
     background-size: cover;                                                                                                         
 }
+
+.userprofile .profile_tree {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
