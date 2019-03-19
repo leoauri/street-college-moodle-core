@@ -20,9 +20,41 @@ defined('MOODLE_INTERNAL') || die;
 
 class core_renderer extends \theme_boost\output\core_renderer {
     public function header() {
+        global $DB;
         if ($this->page->url->get_path() == '/user/view.php') {
             // debugging('Resetting things for user view');
             $this->page->set_pagetype('user-profile');
+            
+            // Stealing protected properties
+            $shortname = \Closure::bind(
+                function() {
+                    return $this->_course->shortname;
+                }, 
+                $this->page, 
+                'moodle_page'
+            )();
+
+            $url = \Closure::bind(
+                function() {
+                    return $this->_url;
+                }, 
+                $this->page, 
+                'moodle_page'
+            )();
+            $userid = \Closure::bind(
+                function() {
+                    return $this->params['id'];
+                }, 
+                $url, 
+                'moodle_url'
+            )();
+            $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
+            
+            // Override to shorter page title
+            $this->page->set_title("$shortname: " . fullname($user));
+
+            // print_object(fullname($user));
+            
         }
         
         return parent::header();
