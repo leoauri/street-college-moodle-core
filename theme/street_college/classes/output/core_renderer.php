@@ -59,4 +59,17 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
         return parent::header();
     }
+
+    public function context_header($headerinfo = null, $headinglevel = 1) {
+        // Use the user heading rather than course heading in /user/view
+        if ($this->page->url->get_path() == '/user/view.php' && $headinglevel == 1) {
+            global $DB;
+            $userid = $this->page->url->get_param('id');
+            $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
+
+            $headerinfo['user'] = $user;
+        }
+
+        return parent::context_header($headerinfo, $headinglevel);
+    }
 }
