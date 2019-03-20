@@ -61,13 +61,21 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     public function context_header($headerinfo = null, $headinglevel = 1) {
-        // Use the user heading rather than course heading in /user/view
-        if ($this->page->url->get_path() == '/user/view.php' && $headinglevel == 1) {
-            global $DB;
-            $userid = $this->page->url->get_param('id');
-            $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
+        if ($this->page->url->get_path() == '/user/view.php') {
+            switch ($headinglevel) {
+                // Use the user heading rather than course heading in /user/view
+                case 1:
+                    global $DB;
+                    $userid = $this->page->url->get_param('id');
+                    $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
 
-            $headerinfo['user'] = $user;
+                    $headerinfo['user'] = $user;
+                    break;
+
+                // Remove repeated heading from /user/view
+                case 2:
+                    return;
+            }
         }
 
         return parent::context_header($headerinfo, $headinglevel);
