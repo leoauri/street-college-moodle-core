@@ -28,3 +28,16 @@ body.pagelayout-login {
 .userpicture {
     border-radius: 0;
 }
+
+#region-main {
+    border: none;
+}
+
+.card, 
+#page-enrol-users #filterform, 
+.que .history, 
+.userprofile .profile_tree section, 
+.groupinfobox, 
+.well {
+    border: none;
+}
