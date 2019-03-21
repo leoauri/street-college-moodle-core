@@ -119,3 +119,18 @@ a:hover {
     color: $color-link;
     background-color: $color-lowlight;
 }
+
+// Dropdown
+.dropdown-menu {
+    background-color: $color-foreground;
+}
+.dropdown-item {
+    color: $color-background;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    color: $color-background;
+    background-color: $color-highlight;
+}
+.dropdown-divider {
+    border-top-color: $color-highlight;
+}
