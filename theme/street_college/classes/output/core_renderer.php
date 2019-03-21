@@ -98,11 +98,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             return '';
         }
 
-        // All the html stuff goes here.
-        $html = html_writer::start_div('page-context-header');
-
-        // In case buttons get rendered somewhere, contain headings and image in their own div
-        $headingsandimage = '';
+        $html = '';
 
         // Headings.
         if (!isset($contextheader->heading)) {
@@ -111,16 +107,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $headings = $this->heading($contextheader->heading, $contextheader->headinglevel);
         }
         
-        $headingsandimage .= html_writer::tag('div', $headings, array('class' => 'page-header-headings'));
+        $html .= html_writer::tag('div', $headings, array('class' => 'page-header-headings'));
         
-        // Image data.
-        if (isset($contextheader->imagedata)) {
-            // Header specific image.
-            $headingsandimage .= html_writer::div($contextheader->imagedata, 'page-header-image');
-        }
-
-        $html .= html_writer::div($headingsandimage, 'page-header-headings-and-image');
-
         // Buttons.
         if (isset($contextheader->additionalbuttons)) {
             $html .= html_writer::start_div('btn-group header-button-group');
@@ -145,8 +133,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
             }
             $html .= html_writer::end_div();
         }
-        $html .= html_writer::end_div();
-
         return $html;
     }
 
@@ -156,13 +142,55 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string HTML to display the main header.
      */
     public function full_header() {
-        global $PAGE;
-
         $header = new stdClass();
         $header->settingsmenu = $this->context_header_settings_menu();
         $header->contextheader = $this->context_header();
+        $header->image = $this->context_header_image();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         return $this->render_from_template('theme_street_college/header', $header);
+    }
+
+    public function context_header_image($headerinfo = null, $headinglevel = 1) {
+        global $DB;
+        if ($this->page->url->get_path() == '/user/view.php') {
+            switch ($headinglevel) {
+                // Use the user heading rather than course heading in /user/view
+                case 1:
+                    $userid = $this->page->url->get_param('id');
+                    $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
+
+                    $headerinfo['user'] = $user;
+                    break;
+
+                // Remove repeated heading from /user/view
+                case 2:
+                    return;
+            }
+        }
+
+        $context = $this->page->context;
+        $imagedata = null;
+        
+        if (isset($headerinfo['user']) || $context->contextlevel == CONTEXT_USER) {
+            if (isset($headerinfo['user'])) {
+                $user = $headerinfo['user'];
+            } else {
+                // Look up the user information if it is not supplied.
+                $user = $DB->get_record('user', array('id' => $context->instanceid));
+            }
+
+            // Only provide user information if the user is the current user, or a user which the current user can view.
+            // When checking user_can_view_profile(), either:
+            // If the page context is course, check the course context (from the page object) or;
+            // If page context is NOT course, then check across all courses.
+            $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
+    
+            if (user_can_view_profile($user, $course)) {
+                $imagedata = $this->user_picture($user, array('size' => 100));
+            }
+        }
+
+        return $imagedata;
     }
 }
