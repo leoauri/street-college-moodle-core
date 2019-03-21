@@ -104,3 +104,18 @@ a:hover {
 .navbar-light .navbar-nav .nav-link:focus {
     color: $color-lowlight-hover;
 }
+
+// Drawer
+[data-region="drawer"] {
+    background-color: $color-drawer;
+}
+.list-group-item {
+    background-color: $color-background;
+}
+.list-group-item-action {
+    color: $color-link;
+}
+.list-group-item-action:hover, .list-group-item-action:focus {
+    color: $color-link;
+    background-color: $color-lowlight;
+}
