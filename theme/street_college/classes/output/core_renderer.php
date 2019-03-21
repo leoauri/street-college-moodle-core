@@ -18,6 +18,7 @@ namespace theme_street_college\output;
 
 use html_writer;
 use context_header;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -147,5 +148,21 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $html .= html_writer::end_div();
 
         return $html;
+    }
+
+    /**
+     * Wrapper for header elements.
+     *
+     * @return string HTML to display the main header.
+     */
+    public function full_header() {
+        global $PAGE;
+
+        $header = new stdClass();
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+        $header->pageheadingbutton = $this->page_heading_button();
+        $header->courseheader = $this->course_header();
+        return $this->render_from_template('theme_street_college/header', $header);
     }
 }
