@@ -13,6 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+// 
+// Remove styling
+// 
 
 body.pagelayout-login {                                                                                                             
     background-image: url([[pix:theme|Street_College_Logo_rgb_shadow_transp]]);                                                                
@@ -40,4 +43,64 @@ body.pagelayout-login {
 .groupinfobox, 
 .well {
     border: none;
+}
+
+
+// 
+// Colour scheme
+// 
+
+body {
+    background-color: $color-background;
+    color: $color-foreground;
+}
+
+.card, 
+#page-enrol-users #filterform, 
+.que .history, 
+.userprofile .profile_tree section, 
+.groupinfobox, 
+.well {
+    background-color: $color-background;
+}
+
+#region-main {
+    background-color: $color-background;
+}
+
+a {
+    color: $color-link;
+}
+a:hover {
+    color: $color-link-hover;
+}
+
+.navbar {
+    background-color: $color-card;
+}
+.navbar {
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+}
+.navbar-light .navbar-brand {
+    color: $color-link;
+}
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+    color: $color-link-hover;
+}
+.lowlight {
+    background-color: $color-lowlight;
+    color: $color-link;
+}
+.lowlight-hover:hover {
+    background-color: $color-lowlight-hover;
+    color: $color-link-hover;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: $color-lowlight;
+}
+.navbar-light .navbar-nav .nav-link:hover, 
+.navbar-light .navbar-nav .nav-link:focus {
+    color: $color-lowlight-hover;
 }
