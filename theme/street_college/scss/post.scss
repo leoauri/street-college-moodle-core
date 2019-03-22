@@ -134,3 +134,10 @@ a:hover {
 .dropdown-divider {
     border-top-color: $color-highlight;
 }
+
+// Messages
+.alert-danger, #page-admin-index .adminerror {
+    color: $color-danger-foreground;
+    background-color: $color-danger-background;
+    border-color: $color-link;
+}
