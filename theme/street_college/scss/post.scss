@@ -142,3 +142,37 @@ a:hover {
     background-color: $color-danger-background;
     border-color: $color-link;
 }
+
+// Forms & buttons
+.form-control {
+    background-color: $color-foreground;
+    color: $color-background;
+}
+.form-control:focus {
+    background-color: $color-highlight;
+    color: $color-background;
+    border-color: $color-drawer;
+}
+.form-control::placeholder {
+    color: $color-ghost;
+}
+.btn-primary {
+    color: $color-foreground;
+    background-color: $color-drawer;
+    border-color: $color-drawer;
+}
+.btn-primary:hover {
+    color: $color-foreground;
+    background-color: $color-card;
+    border-color: $color-card;
+}
+.btn-secondary, .btn-default {
+    color: $color-link;
+    background-color: $color-lowlight-hover;
+    border-color: $color-lowlight-hover;
+}
+.btn-secondary:hover, .btn-default:hover {
+    color: $color-link;
+    background-color: $color-card;
+    border-color: $color-card;
+}
