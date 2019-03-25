@@ -157,17 +157,26 @@ a:hover {
     background-color: $color-danger-background;
     border-color: $color-link;
 }
+.text-danger, .notconnected, .que .validationerror, .text-error {
+    color: $color-danger-background !important;
+}
 
 // Forms & buttons
-.form-control {
+.form-control,
+.custom-select {
     background-color: $color-foreground;
     color: $color-background;
+    &:focus {
+        background-color: $color-highlight;
+        color: $color-background;
+        border-color: $color-drawer;
+    }
 }
-.form-control:focus {
-    background-color: $color-highlight;
-    color: $color-background;
-    border-color: $color-drawer;
-}
+// .form-control:focus {
+//     background-color: $color-highlight;
+//     color: $color-background;
+//     border-color: $color-drawer;
+// }
 .form-control::placeholder {
     color: $color-ghost;
 }
