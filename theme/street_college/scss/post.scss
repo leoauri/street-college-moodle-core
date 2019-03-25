@@ -130,6 +130,11 @@ a:hover {
     color: $color-link;
     background-color: $color-lowlight;
 }
+.list-group-item.active {
+    color: $color-foreground;
+    background-color: $color-ghost;
+    border-color: $color-ghost;
+}
 
 // Dropdown
 .dropdown-menu {
