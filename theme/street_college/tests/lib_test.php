@@ -46,7 +46,7 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
         $this->testtree = new \core_user\output\myprofile\tree;
 
         // Copy the tree for comparitive tests
-        $this->testtreecopy = $this->testtree;
+        $this->testtreecopy = clone $this->testtree;
 
         $this->testuser = $this->getDataGenerator()->create_user();
         $this->setUser($this->testuser);
@@ -129,7 +129,7 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
             $this->testtree, $this->testuser, null, null
         );
 
-        $this->assertSame($this->testtreecopy, $this->testtree);
+        $this->assertEquals($this->testtreecopy, $this->testtree);
     }
 
     public function test_no_capability_context_course() {
@@ -137,7 +137,7 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
             $this->testtree, $this->testuser, null, $this->testcourse
         );
 
-        $this->assertSame($this->testtreecopy, $this->testtree);
+        $this->assertEquals($this->testtreecopy, $this->testtree);
     }
 
 
@@ -149,6 +149,6 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
             $this->testtree, $this->testuser, null, $this->testcourse
         );
 
-        $this->assertSame($this->testtreecopy, $this->testtree);
+        $this->assertEquals($this->testtreecopy, $this->testtree);
     }
 }
