@@ -47,36 +47,33 @@ function theme_street_college_myprofile_navigation(tree $tree, $user, $iscurrent
 
 function theme_street_college_myprofile_add_notes(tree $tree, $user, $iscurrentuser, $course) {
     global $CFG;
-
+    
+    // Abort if notes are disabled.
     if (empty($CFG->enablenotes)) {
-        // Notes are disabled, nothing to do.
         return false;
     }
-
+    // Don't add notes for guest users.
     if (isguestuser($user)) {
-        // No notes for guest users.
         return false;
     }
-
-    $url = new moodle_url(
+    // Check for notes capability
+    $context = empty($course) ? context_system::instance() : context_course::instance($course->id);
+    if (!has_capability('moodle/notes:view', $context)) {
+        return false;
+    }
+    
+    $notesnewurl = new moodle_url(
         '/notes/edit.php', 
         ['userid' => $user->id, 'publishstate' => 'site']
     );
-
-    if (empty($course)) {
-        // Site level profile.
-        if (!has_capability('moodle/notes:view', context_system::instance())) {
-            // No cap, nothing to do.
-            return false;
-        }
-    } else {
-        if (!has_capability('moodle/notes:view', context_course::instance($course->id))) {
-            // No cap, nothing to do.
-            return false;
-        }
-        $url->param('courseid', $course->id);
+    $notessummaryurl = new moodle_url('/notes/index.php', ['userid' => $user->id]);
+    
+    // Add course param to urls
+    if ($course) {
+        $notesnewurl->param('courseid', $course->id);
+        $notessummaryurl->param('course', $course->id);
     }
-
+    
     // Add notes category
     $notescategory = new core_user\output\myprofile\category(
         'notes', 
@@ -84,13 +81,24 @@ function theme_street_college_myprofile_add_notes(tree $tree, $user, $iscurrentu
         'contact'
     );
     $tree->add_category($notescategory);
+
     // Add link to add notes
-    $node = new core_user\output\myprofile\node(
+    $notesnewnode = new core_user\output\myprofile\node(
         'notes', 
         'newnote', 
         get_string('newnote', 'theme_street_college'), 
         null, 
-        $url
+        $notesnewurl
     );
-    $tree->add_node($node);
+    $tree->add_node($notesnewnode);
+
+    // Add link to notes summary
+    $notessummarynode = new core_user\output\myprofile\node(
+        'notes', 
+        'notessummary', 
+        get_string('notessummary', 'theme_street_college'), 
+        null, 
+        $notessummaryurl
+    );
+    $tree->add_node($notessummarynode);
 }
