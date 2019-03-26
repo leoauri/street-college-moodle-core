@@ -86,6 +86,19 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
         accesslib_clear_all_caches_for_unit_testing();
     }
 
+    protected function assertHasNodes($treenodes, $nodestotest, $parent = null) {
+        switch (gettype($nodestotest)) {
+            case 'string':
+                $nodestotest = array($nodestotest);
+        }
+        foreach ($nodestotest as $nodename) {
+            $this->assertArrayHasKey($nodename, $treenodes);
+            if ($parent) {
+                $this->assertEquals($parent, $treenodes[$nodename]->parentcat);
+            }
+        }
+    }
+    
     public function test_notes_added_context_system() {
         $this->assign_capability('moodle/notes:view');
 
@@ -95,8 +108,38 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
         );
         
         $this->assertArrayHasKey('notes', $this->testtree->categories);
-        $this->assertArrayHasKey('newnote', $this->testtree->nodes);
-        $this->assertEquals('notes', $this->testtree->nodes['newnote']->parentcat);
+
+        $nodenames = ['newnote', 'notessummary'];
+        $this->assertHasNodes($this->testtree->nodes, $nodenames, 'notes');
+    }
+
+    public function test_notes_urls() {
+        $this->assign_capability('moodle/notes:view');
+
+        // Function modifies tree in place
+        theme_street_college_myprofile_navigation(
+            $this->testtree, $this->testuser, null, null
+        );
+
+        $nodelinks = [
+            'newnote' => '/notes/edit.php', 
+            'notessummary' => '/notes/index.php',
+        ];
+
+        global $CFG;
+        foreach ($nodelinks as $node => $link) {
+            $this->assertEquals(
+                $this->exposedProperty((new moodle_url($link)), 'path'),
+                $this->exposedProperty($this->testtree->nodes[$node]->url, 'path')
+            );
+        }
+    }
+
+    protected function exposedProperty($object, $prop) {
+        $reflection = new ReflectionObject($object);
+        $reflectedprop = $reflection->getProperty($prop);
+        $reflectedprop->setAccessible(true);
+        return $reflectedprop->getValue($object);
     }
 
     public function test_notes_added_context_course() {
@@ -109,18 +152,16 @@ class theme_street_college_myprofile_add_notes_test extends advanced_testcase {
         );
         
         $this->assertArrayHasKey('notes', $this->testtree->categories);
-        $this->assertArrayHasKey('newnote', $this->testtree->nodes);
-        $this->assertEquals('notes', $this->testtree->nodes['newnote']->parentcat);
+
+        $nodenames = ['newnote', 'notessummary'];
+        $this->assertHasNodes($this->testtree->nodes, $nodenames, 'notes');
         
         // Test that url has courseid param
-        $nodeurl = new ReflectionObject($this->testtree->nodes['newnote']->url);
-        $nodeparams = $nodeurl->getProperty('params');
-        $nodeparams->setAccessible(true);
         $this->assertEquals(
             // The course id
             $this->testcourse->id, 
             // The url param stored in the tree object
-            $nodeparams->getValue($this->testtree->nodes['newnote']->url)['courseid']
+            $this->exposedProperty($this->testtree->nodes['newnote']->url, 'params')['courseid']
         );
     }
 
