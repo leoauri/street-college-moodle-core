@@ -23,7 +23,6 @@ Feature: See a list of course participants
             | student2 | C1     | student |
             | student2 | C2     | student |
             | student3 | C2     | student |
-
     Scenario: Add the course participants block to a course and see course participants
         Given I log in as "admin"
         And I am on "Course 1" course homepage with editing mode on
@@ -42,3 +41,11 @@ Feature: See a list of course participants
         Then I should see "One Student" in the "Course participants" "block"
         And I should see "Two Student" in the "Course participants" "block"
         And I should not see "Three Student" in the "Course participants" "block"
+
+    Scenario: Follow a link to student profile
+        Given I log in as "admin"
+        And I am on "Course 1" course homepage with editing mode on
+        And I add the "Course participants" block
+        And I follow "One Student"
+        Then "#page-user-profile" "css_element" should exist
+        
