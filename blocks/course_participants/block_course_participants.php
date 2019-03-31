@@ -60,4 +60,27 @@ class block_course_participants extends block_list {
     public function applicable_formats() {
         return array('course-view' => true);
     }
+
+    /**
+     * Returns the contents.
+     *
+     * @return stdClass contents of block
+     */
+    public function get_content() {
+        if (isset($this->content)) {
+            return $this->content;
+        }
+
+        $this->content = new stdClass();
+        $this->content->items = array();
+        foreach ($this->participants as $participant) {
+            $this->content->items[] = html_writer::link(
+                new moodle_url('/user/view.php', ['id' => $participant->id]),
+                fullname($participant)
+            );
+        }
+
+        $this->content->icons = array();
+        return $this->content;
+    }
 }
