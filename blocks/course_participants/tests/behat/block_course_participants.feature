@@ -1,6 +1,6 @@
 @block @block_course_participants
 Feature: See a list of course participants
-    In order to enable navigation to the students in courses
+    In order to enable navigation to student profiles from courses
     As an admin
     I want to provide a list summarising course participants with links to their profiles
 
@@ -46,6 +46,6 @@ Feature: See a list of course participants
         Given I log in as "admin"
         And I am on "Course 1" course homepage with editing mode on
         And I add the "Course participants" block
-        And I follow "One Student"
-        Then "#page-user-profile" "css_element" should exist
-        
+        When I follow "One Student"
+        Then I should see "User details"
+        And I should see "student.one@stop.stop"
