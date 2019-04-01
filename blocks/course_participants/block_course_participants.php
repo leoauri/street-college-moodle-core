@@ -75,7 +75,10 @@ class block_course_participants extends block_list {
         $this->content->items = array();
         foreach ($this->participants as $participant) {
             $this->content->items[] = html_writer::link(
-                new moodle_url('/user/view.php', ['id' => $participant->id]),
+                new moodle_url(
+                    '/user/view.php', 
+                    ['id' => $participant->id, 'course' => $this->page->course->id]
+                ),
                 fullname($participant)
             );
         }
