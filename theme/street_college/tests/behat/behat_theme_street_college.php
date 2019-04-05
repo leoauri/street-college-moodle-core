@@ -27,6 +27,7 @@
 
 require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 
+use Behat\Mink\Exception\ExpectationException as ExpectationException;
 use Behat\Mink\Exception\ElementNotFoundException as ElementNotFoundException;
 
 class behat_theme_street_college extends behat_base {
@@ -50,4 +51,27 @@ class behat_theme_street_college extends behat_base {
             $this->wait_for_pending_js();
         }
     }
+
+    /**
+     * Check that the given selector matches a given number of times.
+     * 
+     * @Then /^there should be "(?P<instances_number>\d+)" instances? of "(?P<element_string>(?:[^"]|\\")*)" "(?P<selector_string>(?:[^"]|\\")*)"$/
+     * @throws ExpectationException
+     * @param int $instances expected number of occurences
+     * @param $element element selector
+     * @param $selectortype selector type
+     */
+    public function should_be_instances_of(int $instances, $element, $selectortype) {
+        list($selector, $locator) = $this->transform_selector($selectortype, $element);
+
+        $count = count($this->find_all($selector, $locator));
+
+        if ($count != $instances) {
+            throw new ExpectationException(
+                "\"$element\" \"$selectortype\" found $count times", 
+                $this->getSession()
+            );
+        }
+    }
+
 }
