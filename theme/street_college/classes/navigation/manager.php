@@ -52,4 +52,16 @@ class manager {
 
         return $flatnav;
     }
+
+    /**
+     * Build flat_navigation for street college theme.  
+     * Calls object to add hierarchy
+     * @return flat_navigation object ready for rendering by the mustache template for our theme
+     */
+    public static function get_flatnav(\moodle_page &$page) {
+        $flatnav = new flat_navigation($page);
+        $flatnav->add_hierarchy();
+        // $flatnav->add_admin();
+        return $flatnav;
+    }
 }
