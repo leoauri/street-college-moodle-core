@@ -51,10 +51,5 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
 ];
 
-// Here's our chance to bastardize the flatnav before it gets sent to the template
-$trimmedflatnav = theme_street_college\navigation\manager::trimmed_flatnav($PAGE->flatnav);
-unset($PAGE->flatnav);
-
-$templatecontext['flatnavigation'] = $trimmedflatnav;
+$templatecontext['flatnavigation'] = theme_street_college\navigation\manager::get_flatnav($PAGE);
 echo $OUTPUT->render_from_template('theme_street_college/columns2', $templatecontext);
-
