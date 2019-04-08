@@ -32,10 +32,6 @@ body.pagelayout-login {
     border-radius: 0;
 }
 
-#region-main {
-    border: none;
-}
-
 .card, 
 #page-enrol-users #filterform, 
 .que .history, 
@@ -246,13 +242,25 @@ a:hover {
 }
 
 
+// 
+// Borders and spacings
+// 
+#region-main {
+    border: 1px dashed $color-ghost;
+}
+
+
 
 // 
-// Dashboard
+// Page specific settings
 // 
+
+// Dashboard
 .card-body {
     border: 1px dashed $color-ghost;
 }
+
+// myprofile
 .userprofile .profile_tree section {
     border: none;
 }
