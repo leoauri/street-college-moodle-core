@@ -62,6 +62,7 @@ class manager {
         $flatnav = new flat_navigation($page);
         $flatnav->add_hierarchy();
         // $flatnav->add_admin();
+        // $flatnav->add_block_management();
         return $flatnav;
     }
 }

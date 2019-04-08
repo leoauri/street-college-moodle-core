@@ -125,11 +125,13 @@ class navigation_node {
         string $key, 
         string $text, 
         moodle_url $action = null, 
-        pix_icon $icon = null
+        pix_icon $icon = null,
+        int $indent = 0
     ) {
         $this->key = $key;
         $this->text = $text;
         $this->action = $action;
         $this->icon = $icon;
+        $this->get_indent = $indent;
     }
 }

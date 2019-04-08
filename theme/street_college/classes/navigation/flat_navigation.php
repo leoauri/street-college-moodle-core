@@ -68,13 +68,30 @@ class flat_navigation implements \IteratorAggregate {
      * Add nodes mapping the position in the site hierarchy
      */
     public function add_hierarchy() {
+        $indent = 0;
         // Add root dashboard node
         $this->add_node(new navigation_node(
             'myhome', 
             get_string('myhome'), 
             new moodle_url('/my/'),
-            new pix_icon('i/dashboard', '')
+            new pix_icon('i/dashboard', ''),
+            $indent++
         ));
+
+        // If we are not in site context, add second node for course context
+        if ($this->page->course->id != SITEID) {
+            $this->add_node(new navigation_node(
+                'course_' . $this->page->course->id,
+                format_string(
+                    $this->page->course->shortname, 
+                    true, 
+                    array('context' => $this->page->context)
+                ),
+                new moodle_url('/course/view.php', ['id' => $this->page->course->id]),
+                new pix_icon('i/course', ''),
+                $indent++
+            ));
+        }
     }
 
     /**
