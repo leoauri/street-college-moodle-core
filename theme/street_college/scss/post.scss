@@ -54,6 +54,10 @@ img.userpicture {
     margin: 0;
 }
 
+#page-my-index {
+    background-color: $color-background;
+}
+
 
 
 // 
@@ -87,8 +91,6 @@ a:hover {
 
 .navbar {
     background-color: $color-card;
-}
-.navbar {
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
 }
@@ -99,12 +101,12 @@ a:hover {
     color: $color-link-hover;
 }
 .lowlight {
-    background-color: $color-lowlight;
-    color: $color-link;
+    background-color: $color-link;
+    color: $color-foreground;
 }
 .lowlight-hover:hover {
     background-color: $color-lowlight-hover;
-    color: $color-link-hover;
+    color: $color-foreground;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -118,17 +120,18 @@ a:hover {
 // Drawer
 [data-region="drawer"] {
     background-color: $color-drawer;
+    border-right: 18px dashed $color-ghost;
 }
 .list-group-item {
     background-color: $color-background;
-    border-color: $color-card;
+    border-color: $color-ghost;
 }
 .list-group-item-action {
     color: $color-link;
 }
 .list-group-item-action:hover, .list-group-item-action:focus {
-    color: $color-link;
-    background-color: $color-lowlight;
+    color: $color-link-hover;
+    background-color: $color-link;
 }
 .list-group-item.active {
     color: $color-foreground;
@@ -138,20 +141,31 @@ a:hover {
 
 // Dropdown
 .dropdown-menu {
-    background-color: $color-foreground;
+    background-color: $color-form;
+    color: $color-foreground;
+    border: 1px solid $color-form-focus;
 }
 .dropdown-item {
-    color: $color-background;
-}
-.dropdown-item:hover, .dropdown-item:focus {
-    color: $color-background;
-    background-color: $color-highlight;
+    color: $color-foreground;
+    &:hover, &:focus {
+        color: $color-foreground;
+        background-color: $color-form-focus;
+    }
 }
 .dropdown-divider {
-    border-top-color: $color-highlight;
+    border-top-color: $color-form-focus;
 }
 
 // Messages
+.alert-warning, 
+#page-admin-index .adminwarning, 
+.uninstalldeleteconfirmexternal, 
+.que .outcome, 
+.que .comment {
+    color: $color-warning-foreground;
+    background-color: $color-warning-background;
+    border-color: $color-warning-background;
+}
 .alert-danger, #page-admin-index .adminerror {
     color: $color-danger-foreground;
     background-color: $color-danger-background;
@@ -160,43 +174,85 @@ a:hover {
 .text-danger, .notconnected, .que .validationerror, .text-error {
     color: $color-danger-background !important;
 }
+.text-info, .highlight {
+    color: $color-link !important;
+}
 
 // Forms & buttons
 .form-control,
 .custom-select {
-    background-color: $color-foreground;
-    color: $color-background;
+    background-color: $color-form;
+    color: $color-foreground;
     &:focus {
-        background-color: $color-highlight;
-        color: $color-background;
-        border-color: $color-drawer;
+        background-color: $color-form-focus;
+        color: $color-foreground;
+        border-color: $color-form;
+        -webkit-box-shadow: 0 0 0 .2rem $color-form;
+        box-shadow: 0 0 0 .2rem $color-form;
     }
 }
-// .form-control:focus {
-//     background-color: $color-highlight;
-//     color: $color-background;
-//     border-color: $color-drawer;
-// }
 .form-control::placeholder {
     color: $color-ghost;
 }
 .btn-primary {
     color: $color-foreground;
-    background-color: $color-drawer;
-    border-color: $color-drawer;
-}
-.btn-primary:hover {
-    color: $color-foreground;
-    background-color: $color-card;
-    border-color: $color-card;
+    background-color: $color-form;
+    border-color: $color-form;
+    &:hover {
+        color: $color-link;
+        background-color: $color-card;
+        border-color: $color-card;
+    }
 }
 .btn-secondary, .btn-default {
-    color: $color-link;
-    background-color: $color-lowlight-hover;
-    border-color: $color-lowlight-hover;
+    color: $color-foreground;
+    background-color: $color-form-focus;
+    border-color: $color-form-focus;
+    &:hover {
+        color: $color-link;
+        background-color: $color-card;
+        border-color: $color-card;
+    }
 }
-.btn-secondary:hover, .btn-default:hover {
+.btn-outline-secondary {
     color: $color-link;
-    background-color: $color-card;
-    border-color: $color-card;
+    border-color: $color-link;
+    &:hover {
+        color: $color-link-hover;
+        background-color: $color-link;
+        border-color: $color-link;
+    }
+}
+.block .block-cards .btn.btn-link.btn-icon:hover, 
+.block .block-cards #page-grade-grading-manage .actions .action.btn-link.btn-icon:hover, 
+#page-grade-grading-manage .actions .block .block-cards .action.btn-link.btn-icon:hover, 
+.block .block-cards #rubric-rubric.gradingform_rubric #rubric-criteria .criterion .addlevel input.btn-link.btn-icon:hover, 
+#rubric-rubric.gradingform_rubric #rubric-criteria .criterion .addlevel .block .block-cards input.btn-link.btn-icon:hover, 
+.block .block-cards #rubric-rubric.gradingform_rubric .addcriterion.btn-link.btn-icon:hover, 
+#rubric-rubric.gradingform_rubric .block .block-cards .addcriterion.btn-link.btn-icon:hover, 
+.block .block-cards .btn.btn-link.btn-icon:focus, 
+.block .block-cards #page-grade-grading-manage .actions .action.btn-link.btn-icon:focus, 
+#page-grade-grading-manage .actions .block .block-cards .action.btn-link.btn-icon:focus, 
+.block .block-cards #rubric-rubric.gradingform_rubric #rubric-criteria .criterion .addlevel input.btn-link.btn-icon:focus, 
+#rubric-rubric.gradingform_rubric #rubric-criteria .criterion .addlevel .block .block-cards input.btn-link.btn-icon:focus, 
+.block .block-cards #rubric-rubric.gradingform_rubric .addcriterion.btn-link.btn-icon:focus, 
+#rubric-rubric.gradingform_rubric .block .block-cards .addcriterion.btn-link.btn-icon:focus {
+    background-color: $color-ghost;
+}
+
+// Courses
+.course-content ul li.section.main {
+    border-bottom: 1px dashed $color-ghost;
+}
+
+
+
+// 
+// Dashboard
+// 
+.card-body {
+    border: 1px dashed $color-ghost;
+}
+.userprofile .profile_tree section {
+    border: none;
 }
