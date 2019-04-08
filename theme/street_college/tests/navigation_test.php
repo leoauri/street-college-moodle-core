@@ -22,6 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_street_college\navigation\navigation_node;
+use theme_street_college\navigation\flat_navigation;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -37,9 +40,13 @@ class theme_street_college_navigation_test extends advanced_testcase {
         set_config('theme', 'street_college');
     }
 
-    public function test_dashboard_node() {
-        $page = new moodle_page();
-        $flatnav = new theme_street_college\navigation\flat_navigation($page);
+    /**
+     * Get the flatnav into an array for a page
+     * @var moodle_page
+     * @return array of navigation_nodes produced by flat_navigation
+     */
+    protected static function flat_navigation_array($page) {
+        $flatnav = new flat_navigation($page);
         $flatnav->add_hierarchy();
 
         $flatnavarray = [];
@@ -47,9 +54,70 @@ class theme_street_college_navigation_test extends advanced_testcase {
             $flatnavarray[] = $node;
         }
 
-        $this->assertEquals('myhome', $flatnavarray[0]->key);
-        $this->assertEquals('Dashboard', $flatnavarray[0]->text);
-        $this->assertEquals('/moodle/my/', $flatnavarray[0]->action->get_path());
-        $this->assertEquals('i/dashboard', $flatnavarray[0]->icon->pix);
+        return $flatnavarray;
+    }
+
+    /**
+     * Assert that the passed navigation_node is valid for the dashboard
+     * @var theme_street_college\navigation\navigation_node
+     */
+    protected function assertIsDashboard(navigation_node $node) {
+        $this->assertEquals('myhome', $node->key);
+        $this->assertEquals('Dashboard', $node->text);
+        $this->assertEquals('/moodle/my/', $node->action->get_path());
+        $this->assertEquals('i/dashboard', $node->icon->pix);
+    }
+
+    /**
+     * Assert number of nodes flat_navigation as array contains
+     * @var array flat_navigation nodes already copied into an array
+     * @var int expected number of nodes
+     */
+    protected function assertNumberOfNodes(array $flatnavarray, int $number) {
+        $this->assertEquals($number, count($flatnavarray), "Failed asserting that flat_navigation contains $number nodes");
+    }
+
+    /**
+     * Test that hierarchy contains the root dashboard node.
+     */
+    public function test_dashboard_node() {
+        $page = new moodle_page();
+
+        $flatnavarray = self::flat_navigation_array($page);
+
+        $this->assertNumberOfNodes($flatnavarray, 1);
+        $this->assertIsDashboard($flatnavarray[0]);
+    }
+
+    /**
+     * Test that hierarchy in course context:
+     *  - contains 2 elements
+     *  - contains dashboard node
+     *  - contains course node
+     */
+    public function test_hierarchy_course_context() {
+        $page = new moodle_page();
+        $course = $this->getDataGenerator()->create_course();
+        $page->set_context(context_course::instance($course->id));
+        $page->set_course($course);
+
+        $flatnavarray = self::flat_navigation_array($page);
+        $this->assertIsDashboard($flatnavarray[0]);
+
+        $this->assertNumberOfNodes($flatnavarray, 2);
+
+        $finalnode = end($flatnavarray);
+
+        $this->assertEquals('course_' . $course->id, $finalnode->key);
+        $this->assertEquals(format_string(
+            $page->course->shortname, 
+            true, 
+            array('context' => $page->context)
+        ), $finalnode->text);
+        $this->assertEquals(
+            new moodle_url('/course/view.php', array('id' => $course->id)), 
+            $finalnode->action
+        );
+        $this->assertEquals('i/course', $finalnode->icon->pix);
     }
 }
