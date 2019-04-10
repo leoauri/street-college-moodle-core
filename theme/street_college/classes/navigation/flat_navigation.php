@@ -27,6 +27,7 @@ namespace theme_street_college\navigation;
 
 use moodle_url;
 use pix_icon;
+use context_system;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -68,6 +69,9 @@ class flat_navigation implements \IteratorAggregate {
      * Add nodes mapping the position in the site hierarchy
      */
     public function add_hierarchy() {
+        // If there are already nodes in the flat_navigation, add a section divider
+        $usedivider = !empty($this->collection);
+
         $indent = 0;
         // Add root dashboard node
         $this->add_node(new navigation_node(
@@ -75,7 +79,8 @@ class flat_navigation implements \IteratorAggregate {
             get_string('myhome'), 
             new moodle_url('/my/'),
             new pix_icon('i/dashboard', ''),
-            $indent++
+            $indent++,
+            $usedivider
         ));
 
         // If we are not in site context, add second node for course context
@@ -90,6 +95,27 @@ class flat_navigation implements \IteratorAggregate {
                 new moodle_url('/course/view.php', ['id' => $this->page->course->id]),
                 new pix_icon('i/course', ''),
                 $indent++
+            ));
+        }
+    }
+
+    public function add_admin() {
+        // If there are already nodes in the flat_navigation, add a section divider
+        $usedivider = !empty($this->collection);
+
+        // This is a guess: very convoluted code in navigationlib.php
+        // We'll add an admin node if the user has either config or configview capabilities
+        if (
+            has_capability('moodle/site:configview', context_system::instance()) || 
+            has_capability('moodle/site:config', context_system::instance())
+        ) {
+            $this->add_node(new navigation_node(
+                'sitesettings',
+                get_string('administrationsite'),
+                new moodle_url('/admin/search.php'),
+                new pix_icon('t/preferences', ''),
+                0,
+                $usedivider
             ));
         }
     }
