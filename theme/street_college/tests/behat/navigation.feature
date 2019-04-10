@@ -38,4 +38,4 @@ Feature: Site navigation
         And I should not see "Grades" in the "#nav-drawer" "css_element"
         And I should not see "General" in the "#nav-drawer" "css_element"
         And I should not see "My courses" in the "#nav-drawer" "css_element"
-        And I should see "Site administration" in the "#nav-drawer" "css_element"
+        And I should not see "Site administration" in the "#nav-drawer" "css_element"

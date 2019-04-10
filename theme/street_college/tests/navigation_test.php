@@ -41,6 +41,19 @@ class theme_street_college_navigation_test extends advanced_testcase {
     }
 
     /**
+     * Add nodes of a flat_navigation object to an array
+     * @var flat_navigation
+     * @var array optional: add to passed array or create new array
+     * @return array with new flat_navigation added to end of passed or new array
+     */
+    protected static function add_to_array(flat_navigation $flatnav, array $flatnavarray = array()) {
+        foreach ($flatnav as $node) {
+            $flatnavarray[] = $node;
+        }
+        return $flatnavarray;
+    }
+
+    /**
      * Get the flatnav into an array for a page
      * @var moodle_page
      * @return array of navigation_nodes produced by flat_navigation
@@ -49,12 +62,7 @@ class theme_street_college_navigation_test extends advanced_testcase {
         $flatnav = new flat_navigation($page);
         $flatnav->add_hierarchy();
 
-        $flatnavarray = [];
-        foreach ($flatnav as $node) {
-            $flatnavarray[] = $node;
-        }
-
-        return $flatnavarray;
+        return self::add_to_array($flatnav);
     }
 
     /**
@@ -119,5 +127,74 @@ class theme_street_college_navigation_test extends advanced_testcase {
             $finalnode->action
         );
         $this->assertEquals('i/course', $finalnode->icon->pix);
+    }
+
+    /**
+     * Test add_admin
+     */
+    public function test_add_admin() {
+        $this->setAdminUser();
+        $page = new moodle_page();
+        $flatnav = new flat_navigation($page);
+        $flatnav->add_admin();
+        $adminnode = $this->add_to_array($flatnav)[0];
+        $this->assertEquals('sitesettings', $adminnode->key);
+    }
+
+    /**
+     * Test no admin nodes when no capability
+     */
+    public function test_no_admin() {
+        $page = new moodle_page();
+        $flatnav = new flat_navigation($page);
+        $flatnavclone = clone $flatnav;
+
+        $flatnav->add_admin();
+        $this->assertEquals($flatnavclone, $flatnav);
+    }
+
+    /**
+     * Test that dividers get added correctly between groups of nodes
+     */
+    public function test_group_dividers() {
+        $this->setAdminUser();
+        $page = new moodle_page();
+        $flatnav = new flat_navigation($page);
+        $flatnav->add_hierarchy();
+
+        // The count of the array now will be equal to the key of the next added node, which should 
+        // be the only one with a divider added
+        $dividerposition = count($this->add_to_array($flatnav));
+
+        $flatnav->add_admin();
+        $flatnavarray = $this->add_to_array($flatnav);
+
+        for ($i = 0; $i < count($flatnavarray); $i++) {
+            if ($i == $dividerposition) {
+                $this->assertTrue($flatnavarray[$i]->showdivider);
+            } else {
+                $this->assertFalse($flatnavarray[$i]->showdivider);
+            }
+        }
+
+        // Do it again to test add_hierarchy divider
+        $page = new moodle_page();
+        $flatnav = new flat_navigation($page);
+        $flatnav->add_admin();
+        
+        // The count of the array now will be equal to the key of the next added node, which should 
+        // be the only one with a divider added
+        $dividerposition = count($this->add_to_array($flatnav));
+        
+        $flatnav->add_hierarchy();
+        $flatnavarray = $this->add_to_array($flatnav);
+
+        for ($i = 0; $i < count($flatnavarray); $i++) {
+            if ($i == $dividerposition) {
+                $this->assertTrue($flatnavarray[$i]->showdivider);
+            } else {
+                $this->assertFalse($flatnavarray[$i]->showdivider);
+            }
+        }
     }
 }
