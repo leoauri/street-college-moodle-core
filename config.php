@@ -90,11 +90,13 @@ $CFG->allowthemechangeonurl = false;
 
 // Hardwire dashboard blocks
 $CFG->forcedefaultmymoodle = true;
+$CFG->defaultblocks_override = 'course_participants';
 
 $CFG->forced_plugin_settings = [
     // Unset default end date for courses
     'moodlecourse' => [
-        'courseenddateenabled' => false
+        'courseenddateenabled' => false,
+        'numsections' => 0
     ]
 ];
 
