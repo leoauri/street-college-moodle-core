@@ -44,7 +44,7 @@ class navigation_node {
     const NODETYPE_BRANCH = 1;
     
     /**
-     * @var int Whether to start a new sub group with this node
+     * @var bool Whether to start a new sub group with this node
      */
     public $showdivider;
 
@@ -126,12 +126,14 @@ class navigation_node {
         string $text, 
         moodle_url $action = null, 
         pix_icon $icon = null,
-        int $indent = 0
+        int $indent = 0,
+        bool $showdivider = false
     ) {
         $this->key = $key;
         $this->text = $text;
         $this->action = $action;
         $this->icon = $icon;
         $this->get_indent = $indent;
+        $this->showdivider = $showdivider;
     }
 }
