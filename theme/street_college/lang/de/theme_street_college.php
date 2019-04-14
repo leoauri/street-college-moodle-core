@@ -16,7 +16,7 @@
 
 /**
  * Language strings for Street College theme:
- * English
+ * German
  * 
  * @package   theme_street_college
  * @copyright 2019 Leo Auri <code@leoauri.com>
@@ -27,22 +27,22 @@
 defined('MOODLE_INTERNAL') || die();
 
 // A description shown in the admin theme selector.
-$string['choosereadme'] = 'Custom theme for Street College Moodle.';
+$string['choosereadme'] = 'Angepasstes Theme für Street College Moodle.';
 // The name of our plugin.
 $string['pluginname'] = 'Street College';
 // We need to include a lang string for each block region.
-$string['region-side-pre'] = 'Right';
+$string['region-side-pre'] = 'Rechts';
 
 // Admin settings area
 // Settings page title
-$string['configtitle'] = 'Theme settings';
+$string['configtitle'] = 'Themen-Einstellungen';
 // Tab titles
-$string['generalsettings'] = 'General settings';
+$string['generalsettings'] = 'Allgemein-Einstellungen';
 
-$string['loginbackgroundimage'] = 'Login page background image';
-$string['loginbackgroundimage_desc'] = 'Background image for the login page.';
+$string['loginbackgroundimage'] = 'Hintergrundbild Anmeldeseite';
+$string['loginbackgroundimage_desc'] = 'Hintergrundbild für die Anmeldeseite.';
 
 // Notes
-$string['usernotes'] = 'Notes';
-$string['newnote'] = 'Take new note';
-$string['notessummary'] = 'Notes summary';
+$string['usernotes'] = 'Notizen';
+$string['newnote'] = 'Neue Notiz';
+$string['notessummary'] = 'Zusammenfassung Notizen';

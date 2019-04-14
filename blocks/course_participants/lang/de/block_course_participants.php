@@ -14,7 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Course participants block language strings.
+ * Course participants block language strings:
+ * German
  *
  * @package    block_course_participants
  * @copyright  2019 Leo Auri <code@leoauri.com>
@@ -23,4 +24,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Course participants';
+$string['pluginname'] = 'Kurs Teilnehmer';
