@@ -100,6 +100,8 @@ $CFG->forced_plugin_settings = [
     ]
 ];
 
+$CFG->defaultpreference_maildisplay = 0;
+
 // Disable components we're not using
 $CFG->messaging = false;
 $CFG->enableblogs = false;
