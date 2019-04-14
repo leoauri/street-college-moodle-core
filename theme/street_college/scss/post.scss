@@ -173,6 +173,18 @@ a:hover {
 .text-info, .highlight {
     color: $color-link !important;
 }
+@keyframes spring {
+    0%, 12%, 24% {
+        transform: translateY(-5px);
+    }
+    6%, 18%, 30% {
+        transform: translateY(0);
+    }
+}
+.invalid-feedback {
+    font-size: 120%;
+    animation: spring 2.4s linear 0.7s normal infinite;
+}
 
 // Forms & buttons
 .form-control,
