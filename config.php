@@ -90,17 +90,25 @@ $CFG->allowthemechangeonurl = false;
 
 // Hardwire dashboard blocks
 $CFG->forcedefaultmymoodle = true;
+
+// Default course blocks
 $CFG->defaultblocks_override = 'course_participants';
 
 $CFG->forced_plugin_settings = [
-    // Unset default end date for courses
     'moodlecourse' => [
+        // Unset default end date for courses
         'courseenddateenabled' => false,
         'numsections' => 0
     ]
 ];
 
+// Default hide email address
 $CFG->defaultpreference_maildisplay = 0;
+
+// Locale settings
+$CFG->timezone = 'Europe/Berlin';
+$CFG->country = 'DE';
+$CFG->defaultcity = 'Berlin';
 
 // Disable components we're not using
 $CFG->messaging = false;
