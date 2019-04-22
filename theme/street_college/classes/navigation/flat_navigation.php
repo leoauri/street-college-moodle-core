@@ -121,6 +121,38 @@ class flat_navigation implements \IteratorAggregate {
     }
 
     /**
+     * Add add-a-block node when applicable and require relevant js
+     */
+    public function add_block_management() {
+        if (
+            isset($this->page->theme->addblockposition) &&
+            $this->page->theme->addblockposition == BLOCK_ADDBLOCK_POSITION_FLATNAV &&
+            $this->page->user_is_editing() &&
+            $this->page->user_can_edit_blocks() &&
+            ($addable = $this->page->blocks->get_addable_blocks())
+        ) {
+            $url = new moodle_url($this->page->url, ['bui_addblock' => '', 'sesskey' => sesskey()]);
+
+            $this->add_node(new navigation_node(
+                'addblock',
+                get_string('addblock'),
+                $url,
+                new pix_icon('i/addblock', ''),
+                0,
+                true
+            ));
+
+            // Add js requires for blocks management
+            $blocks = [];
+            foreach ($addable as $block) {
+                $blocks[] = $block->name;
+            }
+            $params = array('blocks' => $blocks, 'url' => '?' . $url->get_query_string(false));
+            $this->page->requires->js_call_amd('core/addblockmodal', 'init', array($params));
+        }
+    }
+
+    /**
      * @return IteratorAggregate nodes from the collection
      */
     public function getIterator() {
