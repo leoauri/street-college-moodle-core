@@ -2,7 +2,19 @@
 Feature: Site navigation
     In order to navigate and comprehend my position in the structure of the product
     As a user
-    I want a nvaigation which provides an overview of the structure and navigation to essential places
+    I want a navigation which provides an overview of the structure and navigation to essential places
+
+    Scenario: Add-a-block node in editing mode
+        Given I log in as "admin"
+        And the following "courses" exist:
+            | fullname | shortname |
+            | Course 1 | C1        |
+        And I am on "Course 1" course homepage
+        When I turn editing mode on
+        Then I should see "Add a block" in the "#nav-drawer" "css_element"
+        When I turn editing mode off
+        Then I should not see "Add a block" in the "#nav-drawer" "css_element"
+
 
     Scenario: Dashboard admin navigation
         Given I log in as "admin"
