@@ -91,6 +91,9 @@ $CFG->allowthemechangeonurl = false;
 // Remove courses from frontpage
 $CFG->frontpage = '';
 
+// Trim user menu
+$CFG->customusermenuitems = "preferences,moodle|/user/preferences.php|t/preferences";
+
 // Hardwire dashboard blocks
 $CFG->forcedefaultmymoodle = true;
 
