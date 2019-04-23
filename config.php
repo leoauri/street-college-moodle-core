@@ -88,6 +88,9 @@ $CFG->theme = 'street_college';
 $CFG->themelist = 'street_college';
 $CFG->allowthemechangeonurl = false;
 
+// Remove courses from frontpage
+$CFG->frontpage = '';
+
 // Hardwire dashboard blocks
 $CFG->forcedefaultmymoodle = true;
 
