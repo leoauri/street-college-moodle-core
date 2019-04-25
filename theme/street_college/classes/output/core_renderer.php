@@ -193,4 +193,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $imagedata;
     }
+
+    /**
+     * Returns the custom URL for the Street College favicon.
+     *
+     * @return string The favicon URL
+     */
+    public function favicon() {
+        return $this->image_url('favicon_sc', 'theme');
+    }
+
+
 }
