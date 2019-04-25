@@ -88,6 +88,9 @@ $CFG->theme = 'street_college';
 $CFG->themelist = 'street_college';
 $CFG->allowthemechangeonurl = false;
 
+// Set German default
+$CFG->lang = 'de';
+
 // Remove courses from frontpage
 $CFG->frontpage = '';
 
