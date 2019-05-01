@@ -17,7 +17,12 @@ $host = 'localhost';
 if (!empty(getenv('MOODLE_DOCKER_WEB_HOST'))) {
     $host = getenv('MOODLE_DOCKER_WEB_HOST');
 }
-$CFG->wwwroot   = "http://{$host}";
+$protocol = 'http';
+if (!empty(getenv('MOODLE_DOCKER_WEB_PROTOCOL'))) {
+    $protocol = getenv('MOODLE_DOCKER_WEB_PROTOCOL');
+}
+$CFG->wwwroot = "{$protocol}://{$host}";
+
 $port = getenv('MOODLE_DOCKER_WEB_PORT');
 if (!empty($port)) {
     $CFG->wwwroot .= ":{$port}";
