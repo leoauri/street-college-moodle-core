@@ -27,10 +27,33 @@ $port = getenv('MOODLE_DOCKER_WEB_PORT');
 if (!empty($port)) {
     $CFG->wwwroot .= ":{$port}";
 }
+
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 $CFG->directorypermissions = 0777;
-$CFG->smtphosts = 'mailhog:1025';
+
+if (empty(getenv('MOODLE_DOCKER_SMTP_HOST'))) {
+    $CFG->smtphosts = 'mailhog:1025';
+} else {
+    $CFG->smtphosts = getenv('MOODLE_DOCKER_SMTP_HOST');
+
+    if(!empty(getenv('MOODLE_DOCKER_SMTP_SECURITY'))) {
+        $CFG->smtpsecure = getenv('MOODLE_DOCKER_SMTP_SECURITY');
+    }
+
+    if(!empty(getenv('MOODLE_DOCKER_SMTP_AUTHTYPE'))) {
+        $CFG->smtpauthtype = getenv('MOODLE_DOCKER_SMTP_AUTHTYPE');
+    }
+
+    if(!empty(getenv('MOODLE_DOCKER_SMTP_USER'))) {
+        $CFG->smtpuser = getenv('MOODLE_DOCKER_SMTP_USER');
+    }
+
+    if(!empty(getenv('MOODLE_DOCKER_SMTP_PASS'))) {
+        $CFG->smtppass = getenv('MOODLE_DOCKER_SMTP_PASS');
+    }
+}
+
 
 // Debug options - possible to be controlled by flag in future..
 $CFG->debug = (E_ALL | E_STRICT); // DEBUG_DEVELOPER
