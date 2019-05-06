@@ -24,6 +24,14 @@ if (!empty(getenv('MOODLE_DOCKER_WEB_PROTOCOL'))) {
 $CFG->wwwroot = "{$protocol}://{$host}";
 
 $port = getenv('MOODLE_DOCKER_WEB_PORT');
+
+// quick and hacky way to run SSL, should probably clean up
+if (getenv('MOODLE_DOCKER_SSL')) {
+    $port = '443';
+    $CFG->sslproxy = true;
+    $CFG->overridetossl = true;
+}
+
 if (!empty($port)) {
     $CFG->wwwroot .= ":{$port}";
 }
