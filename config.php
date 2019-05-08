@@ -17,15 +17,11 @@ $host = 'localhost';
 if (!empty(getenv('MOODLE_DOCKER_WEB_HOST'))) {
     $host = getenv('MOODLE_DOCKER_WEB_HOST');
 }
-$protocol = 'http';
-if (!empty(getenv('MOODLE_DOCKER_WEB_PROTOCOL'))) {
-    $protocol = getenv('MOODLE_DOCKER_WEB_PROTOCOL');
-}
-$CFG->wwwroot = "{$protocol}://{$host}";
+$CFG->wwwroot = "http://{$host}";
 
-$port = getenv('MOODLE_DOCKER_WEB_PORT');
+$port = '80';
 
-// quick and hacky way to run SSL, should probably clean up
+// setup SSL
 if (getenv('MOODLE_DOCKER_SSL')) {
     $port = '443';
     $CFG->sslproxy = true;
