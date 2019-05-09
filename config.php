@@ -58,8 +58,8 @@ if (empty(getenv('MOODLE_DOCKER_SMTP_HOST'))) {
     }
 }
 
-if (false) {
-    // Debug options - possible to be controlled by flag in future..
+if (getenv('MOODLE_DOCKER_DEV_MODE') == 'true') {
+    // Debug options
     $CFG->debug = (E_ALL | E_STRICT); // DEBUG_DEVELOPER
     $CFG->debugdisplay = 1;
     $CFG->debugstringids = 1; // Add strings=1 to url to get string ids.
