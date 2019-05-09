@@ -127,6 +127,12 @@ $CFG->lang = 'de';
 // Remove courses from frontpage
 $CFG->frontpage = '';
 
+// Remove guest access login button
+$CFG->guestloginbutton = 0;
+
+// Allow login via email
+$CFG->authloginviaemail = true;
+
 // Trim user menu
 $CFG->customusermenuitems = "preferences,moodle|/user/preferences.php|t/preferences";
 
