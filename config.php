@@ -120,6 +120,7 @@ if (false) {
 $CFG->theme = 'street_college';
 $CFG->themelist = 'street_college';
 $CFG->allowthemechangeonurl = false;
+$CFG->enabledevicedetection = false;
 
 // Set German default
 $CFG->lang = 'de';
