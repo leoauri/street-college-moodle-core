@@ -165,5 +165,8 @@ $CFG->enableblogs = false;
 $CFG->enablebadges = false;
 $CFG->enableavailability = false;
 
+// Security
+$CFG->preventexecpath = true;
+
 
 require_once(__DIR__ . '/lib/setup.php');
