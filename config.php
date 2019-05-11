@@ -22,7 +22,7 @@ $CFG->wwwroot = "http://{$host}";
 $port = '80';
 
 // setup SSL
-if (getenv('MOODLE_DOCKER_SSL')) {
+if (getenv('MOODLE_DOCKER_SSL') == 'true') {
     $port = '443';
     $CFG->sslproxy = true;
     $CFG->overridetossl = true;
