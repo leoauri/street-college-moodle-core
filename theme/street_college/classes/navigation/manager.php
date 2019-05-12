@@ -61,6 +61,7 @@ class manager {
     public static function get_flatnav(\moodle_page &$page) {
         $flatnav = new flat_navigation($page);
         $flatnav->add_hierarchy();
+        $flatnav->add_shortcuts();
         $flatnav->add_admin();
         $flatnav->add_block_management();
         return $flatnav;
