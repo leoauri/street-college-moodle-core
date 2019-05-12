@@ -165,6 +165,10 @@ $CFG->enableblogs = false;
 $CFG->enablebadges = false;
 $CFG->enableavailability = false;
 
+// Enable search
+$CFG->enableglobalsearch = true;
+$CFG->searchallavailablecourses = true;
+
 // Security
 $CFG->preventexecpath = true;
 
