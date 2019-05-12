@@ -186,7 +186,9 @@ a:hover {
     animation: spring 2.4s linear 0.7s normal infinite;
 }
 
+// 
 // Forms & buttons
+// 
 .form-control,
 .custom-select {
     background-color: $color-form;
@@ -200,8 +202,23 @@ a:hover {
     }
 }
 .form-control::placeholder {
-    color: $color-ghost;
+    color: $color-background;
 }
+
+// Remove box-shadow from navbar search box
+nav.navbar .form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    &:focus {
+        border-color: $color-form-focus;
+    }
+}
+
+// Remove focus outline from search icon
+.search-input-wrapper > div:focus {
+    outline: none;
+}
+
 .btn-primary {
     color: $color-foreground;
     background-color: $color-form;
