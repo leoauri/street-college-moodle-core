@@ -4,6 +4,11 @@ Feature: Site navigation
     As a user
     I want a navigation which provides an overview of the structure and navigation to essential places
 
+    Scenario: Tags link
+        Given I log in as "admin"
+        When I am on homepage
+        Then I should see "Tags" in the "#nav-drawer" "css_element"
+
     Scenario: Add-a-block node in editing mode
         Given I log in as "admin"
         And the following "courses" exist:

@@ -66,14 +66,26 @@ class theme_street_college_navigation_test extends advanced_testcase {
     }
 
     /**
+     * Assert that a given node has given attributes
+     * @var theme_street_college\navigation\navigation_node
+     * @var string node key
+     * @var string node text
+     * @var string node path
+     * @var string node icon
+     */
+    protected function assertNodeAtts(navigation_node $node, $key, $text, $path, $icon) {
+        $this->assertEquals($key, $node->key);
+        $this->assertEquals($text, $node->text);
+        $this->assertEquals($path, $node->action->get_path());
+        $this->assertEquals($icon, $node->icon->pix);
+    }
+
+    /**
      * Assert that the passed navigation_node is valid for the dashboard
      * @var theme_street_college\navigation\navigation_node
      */
     protected function assertIsDashboard(navigation_node $node) {
-        $this->assertEquals('myhome', $node->key);
-        $this->assertEquals('Dashboard', $node->text);
-        $this->assertEquals('/moodle/my/', $node->action->get_path());
-        $this->assertEquals('i/dashboard', $node->icon->pix);
+        $this->assertNodeAtts($node, 'myhome', 'Dashboard', '/moodle/my/', 'i/dashboard');
     }
 
     /**
@@ -196,5 +208,24 @@ class theme_street_college_navigation_test extends advanced_testcase {
                 $this->assertFalse($flatnavarray[$i]->showdivider);
             }
         }
+    }
+
+    /**
+     * Test add_shortcuts
+     */
+    public function test_add_shortcuts() {
+        $this->setAdminUser();
+        $page = new moodle_page();
+        $flatnav = new flat_navigation($page);
+        $flatnav->add_shortcuts();
+        $flatnavarray = self::add_to_array($flatnav);
+
+        $this->assertNodeAtts(
+            $flatnavarray[0], 
+            'tagsearch', 
+            'Tags', 
+            '/moodle/tag/search.php', 
+            't/tags'
+        );
     }
 }

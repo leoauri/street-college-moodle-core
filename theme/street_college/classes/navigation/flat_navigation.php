@@ -153,6 +153,21 @@ class flat_navigation implements \IteratorAggregate {
     }
 
     /**
+     * Add shortcuts block to navigation
+     * - tags
+     */
+    public function add_shortcuts() {
+        $this->add_node(new navigation_node(
+            'tagsearch', 
+            get_string('tags'), 
+            new moodle_url('/tag/search.php'), 
+            new pix_icon('t/tags', ''),
+            0,
+            true
+        ));
+    }
+
+    /**
      * @return IteratorAggregate nodes from the collection
      */
     public function getIterator() {
