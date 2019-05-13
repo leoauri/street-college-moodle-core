@@ -1,0 +1,6 @@
+[submodule "mod/attendance"]
+	path = mod/attendance
+	url = https://github.com/danmarsden/moodle-mod_attendance
+[submodule "blocks/attendance"]
+	path = blocks/attendance
+	url = https://github.com/danmarsden/moodle-block_attendance
