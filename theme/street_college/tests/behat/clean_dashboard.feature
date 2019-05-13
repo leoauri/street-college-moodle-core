@@ -1,4 +1,4 @@
-@theme_street_college
+@street_college @theme_street_college
 Feature: Clean dashboard
     In order to have my attention focused on the relevant features
     As a user of the street college databank

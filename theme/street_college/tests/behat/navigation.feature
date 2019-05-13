@@ -1,4 +1,4 @@
-@theme_street_college @theme_street_college_navigation
+@street_college @theme_street_college @theme_street_college_navigation
 Feature: Site navigation
     In order to navigate and comprehend my position in the structure of the product
     As a user
