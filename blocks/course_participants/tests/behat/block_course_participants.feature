@@ -1,4 +1,4 @@
-@block @block_course_participants
+@street_college @block @block_course_participants
 Feature: See a list of course participants
     In order to enable navigation to student profiles from courses
     As an admin
