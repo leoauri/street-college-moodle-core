@@ -297,3 +297,29 @@ nav.navbar .form-control {
 .userprofile .profile_tree section {
     border: none;
 }
+
+
+// 
+// Admin tabs
+// 
+.nav {
+    flex-wrap: wrap-reverse;
+}
+.nav-tabs {
+    border: none;
+}
+.nav-tabs .nav-item {
+    flex-grow: 1;
+    margin-bottom: 7px;
+}
+.nav-tabs .nav-link {
+    border: 1px dashed;
+    border-color: $color-background $color-background $color-ghost;
+    text-align: center;
+    &:focus, &:hover {
+        border-color: $color-link-hover $color-link-hover $color-ghost;
+    }
+}
+.nav-tabs .nav-link.active {
+    border-color: $color-ghost $color-ghost $color-background;
+}
