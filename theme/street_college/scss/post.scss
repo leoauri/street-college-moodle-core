@@ -122,6 +122,9 @@ tbody a:hover {
     background-color: $color-drawer;
     border-right: 18px dashed $color-ghost;
 }
+#nav-drawer .list-group:not(:first-child) {
+    margin-top: 1rem;
+}
 .list-group-item {
     background-color: $color-background;
     border-color: $color-ghost;
