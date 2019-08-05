@@ -32,27 +32,6 @@ use Behat\Mink\Exception\ElementNotFoundException as ElementNotFoundException;
 
 class behat_theme_street_college extends behat_base {
     /**
-     * Opens the flat navigation drawer if it is not already open
-     *
-     * @When /^I open flat navigation drawer$/
-     * @throws ElementNotFoundException Thrown by behat_base::find
-     */
-    public function i_open_flat_navigation_drawer() {
-        if (!$this->running_javascript()) {
-            // Navigation drawer is always open without JS.
-            return;
-        }
-        $xpath = "//button[contains(@data-action,'toggle-drawer')]";
-        $node = $this->find('xpath', $xpath);
-        $expanded = $node->getAttribute('aria-expanded');
-        if ($expanded === 'false') {
-            $node->click();
-            $this->ensure_node_attribute_is_set($node, 'aria-expanded', 'true');
-            $this->wait_for_pending_js();
-        }
-    }
-
-    /**
      * Check that the given selector matches a given number of times.
      * 
      * @Then /^there should be "(?P<instances_number>\d+)" instances? of "(?P<element_string>(?:[^"]|\\")*)" "(?P<selector_string>(?:[^"]|\\")*)"$/
