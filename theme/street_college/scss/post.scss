@@ -54,6 +54,11 @@ img.userpicture {
     background-color: $color-background;
 }
 
+#course-category-listings h3 {
+    padding: .75rem 1.25rem;
+    border-bottom: none;
+}
+
 
 
 // 
@@ -74,6 +79,10 @@ body {
     background-color: $color-background;
 }
 
+.card-header {
+    background-color: $color-card-header;
+}
+
 #region-main {
     background-color: $color-background;
 }
@@ -84,9 +93,38 @@ a {
 a:hover {
     color: $color-link-hover;
 }
-// Table body links need different hover colour for better contrast
+
+// Hover contrasts
 tbody a:hover {
     color: $color-background;
+}
+
+// Admin/course and category management category list hacks
+#course-category-listings {
+    .list-group-item-action:hover, .list-group-item-action:focus {
+        background-color: $color-link;
+        color: $color-link-hover;
+        a:not(.dropdown-item) {
+            color: $color-link-hover;
+            &:hover {
+                color: $color-background;
+            }
+        }
+    }
+    .listitem[data-selected="1"] {
+        background-color: $color-form;
+        color: $color-foreground;
+        a:not(.dropdown-item) {
+            color: $color-foreground;
+            &:hover {
+                color: $color-background;
+            }
+        }
+    }
+    .list-group-item-action .list-group-item-action:hover {
+        outline: 1px solid $color-background;
+        outline-offset: -2px;
+    }
 }
 
 .navbar {
