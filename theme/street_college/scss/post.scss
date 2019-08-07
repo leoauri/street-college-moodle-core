@@ -54,17 +54,17 @@ img.userpicture {
     background-color: $color-background;
 }
 
-#course-category-listings h3 {
-    padding: .75rem 1.25rem;
-}
-
-#course-category-listings .detail-pair .pair-key span {
-    margin-right: 0;
-}
-
-#course-category-listings .col-md-3 {
-    flex: unset;
-    max-width: none;
+#course-category-listings {
+    h3 {
+        padding: .75rem 1.25rem;
+    }
+    .detail-pair .pair-key span {
+        margin-right: 0;
+    }
+    .col-md-3 {
+        flex: unset;
+        max-width: none;
+    }
 }
 
 .card-header {
