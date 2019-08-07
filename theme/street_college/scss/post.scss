@@ -58,6 +58,15 @@ img.userpicture {
     padding: .75rem 1.25rem;
 }
 
+#course-category-listings .detail-pair .pair-key span {
+    margin-right: 0;
+}
+
+#course-category-listings .col-md-3 {
+    flex: unset;
+    max-width: none;
+}
+
 .card-header {
     border-bottom: none;
 }
