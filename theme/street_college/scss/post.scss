@@ -137,6 +137,12 @@ tbody a:hover {
         outline: 1px solid $color-background;
         outline-offset: -2px;
     }
+
+    // Reduce overflow problems on thin viewport
+    .d-flex {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
 }
 
 .navbar {
