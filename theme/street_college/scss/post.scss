@@ -65,6 +65,13 @@ img.userpicture {
         flex: unset;
         max-width: none;
     }
+    > #course-detail {
+        order: -2;
+        margin-bottom: 1em;
+    }
+    > #course-listing {
+        order: -1;
+    }
 }
 
 .card-header {
