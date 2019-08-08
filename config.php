@@ -17,16 +17,19 @@ $host = 'localhost';
 if (!empty(getenv('MOODLE_DOCKER_WEB_HOST'))) {
     $host = getenv('MOODLE_DOCKER_WEB_HOST');
 }
-$CFG->wwwroot = "http://{$host}";
 
+// Non-SSL
 $port = '80';
+$protocol = 'http';
 
 // setup SSL
 if (getenv('MOODLE_DOCKER_SSL') == 'true') {
+    $protocol = 'https';
     $port = '443';
     $CFG->sslproxy = true;
-    $CFG->overridetossl = true;
 }
+
+$CFG->wwwroot = "{$protocol}://{$host}";
 
 if (!empty($port)) {
     $CFG->wwwroot .= ":{$port}";
