@@ -113,9 +113,18 @@ a:hover {
     color: $color-link-hover;
 }
 
-// Hover contrasts
-tbody a:hover {
-    color: $color-background;
+// Striped table hover contrasts
+.table-hover, 
+table.grading-report, 
+.forumheaderlist, 
+.generaltable, 
+table.flexible, 
+.category_subcategories, 
+table#modules, 
+table#permissions {
+    tbody a:hover {
+        color: $color-background;
+    }
 }
 
 // Admin/course and category management category list hacks
