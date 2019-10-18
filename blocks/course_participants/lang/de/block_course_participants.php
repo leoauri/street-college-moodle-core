@@ -25,3 +25,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Kurs Teilnehmer';
+$string['course_participants:addinstance'] = 'Neue Kurs Teilnehmer Block hinzufügen';
