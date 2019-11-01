@@ -7,6 +7,3 @@
 [submodule "mod/room"]
 	path = mod/room
 	url = ./mod/room/
-[submodule "admin/tool/pluginskel"]
-	path = admin/tool/pluginskel
-	url = ./admin/tool/pluginskel/
