@@ -6,4 +6,4 @@
 	url = https://github.com/danmarsden/moodle-block_attendance
 [submodule "mod/room"]
 	path = mod/room
-	url = ./mod/room/
+	url = https://github.com/leoauri/moodle-mod_room.git
