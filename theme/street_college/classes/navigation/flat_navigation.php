@@ -105,6 +105,7 @@ class flat_navigation implements \IteratorAggregate {
 
         // This is a guess: very convoluted code in navigationlib.php
         // We'll add an admin node if the user has either config or configview capabilities
+        // FIX: we need to add admin node for category-level managers
         if (
             has_capability('moodle/site:configview', context_system::instance()) || 
             has_capability('moodle/site:config', context_system::instance())
