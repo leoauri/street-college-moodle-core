@@ -7,3 +7,6 @@
 [submodule "mod/room"]
 	path = mod/room
 	url = https://github.com/leoauri/moodle-mod_room.git
+[submodule "mod/bigbluebuttonbn"]
+	path = mod/bigbluebuttonbn
+	url = https://github.com/blindsidenetworks/moodle-mod_bigbluebuttonbn.git
