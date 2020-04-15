@@ -163,7 +163,7 @@ $CFG->country = 'DE';
 $CFG->defaultcity = 'Berlin';
 
 // Disable components we're not using
-$CFG->messaging = false;
+$CFG->messaging = true;
 $CFG->enableblogs = false;
 $CFG->enablebadges = false;
 $CFG->enableavailability = false;
