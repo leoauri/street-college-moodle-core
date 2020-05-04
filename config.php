@@ -19,13 +19,13 @@ if (!empty(getenv('MOODLE_DOCKER_WEB_HOST'))) {
 }
 
 // Non-SSL
-$port = '80';
+// $port = '80';
 $protocol = 'http';
 
 // setup SSL
 if (getenv('MOODLE_DOCKER_SSL') == 'true') {
     $protocol = 'https';
-    $port = '443';
+    // $port = '443';
     $CFG->sslproxy = true;
 }
 
