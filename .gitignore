@@ -19,6 +19,9 @@
 # Temporary files including undo
 *~
 
+# VisualStudioCode
+.vscode/*
+
 # Our config.php contains no environment variables, and hardwires the SC theme, so include in the repo
 # /config.php
 
