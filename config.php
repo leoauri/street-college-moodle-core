@@ -62,6 +62,15 @@ if (empty(getenv('MOODLE_DOCKER_SMTP_HOST'))) {
 }
 
 if (getenv('MOODLE_DOCKER_DEV_MODE') == 'true') {
+    // Enable for theme designer mode
+    // $CFG->themedesignermode = true;
+
+    // Prevent JS caching
+    // $CFG->cachejs = false;
+
+    // Increase behat timeout
+    // $CFG->behat_increasetimeout = 5;
+    
     // Debug options
     $CFG->debug = (E_ALL | E_STRICT); // DEBUG_DEVELOPER
     $CFG->debugdisplay = 1;
