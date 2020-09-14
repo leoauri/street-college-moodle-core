@@ -1,0 +1,21 @@
+.foldout-outer.closed .foldout-inner {
+    display: none;
+}
+
+.foldout-outer > a::before {
+    content: '';
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border: 0.5em solid transparent;
+    border-top-color: red;
+    transition: transform 0.2s ease-in-out;
+}
+
+.foldout-outer.closed > a::before {
+    transform: rotate(-90deg);
+}
+
+.foldout-inner {
+    background-color: rgba(226,228,240,.1);
+}

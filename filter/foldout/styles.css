@@ -1,0 +1,25 @@
+.foldout-outer.closed .foldout-inner {
+  display: none;
+}
+
+.foldout-outer > a::before {
+  content: '';
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border: 0.5em solid transparent;
+  border-top-color: red;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+
+.foldout-outer.closed > a::before {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.foldout-inner {
+  background-color: rgba(226, 228, 240, 0.1);
+}
