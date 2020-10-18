@@ -46,15 +46,8 @@ class filter_foldout extends moodle_text_filter {
                 $replacements[] = $replacement;
             }
 
-            // // If opening tags found, add closing tag filterobject
-            // $replacement = new stdClass();
-            // $replacement->search = '[/foldout]';
-            // $replacement->replace = foldout::closingdivs();
-            // $replacements[] = $replacement;
-    
             // If opening tags found, require JS for foldout manipulation
-            global $PAGE;
-            $PAGE->requires->js_call_amd('filter_foldout/foldout_manager', 'init');
+            filter_foldout\output\js_include::include_javascript();
     
             // Count closing tags in text.  
             $closingtags = [];

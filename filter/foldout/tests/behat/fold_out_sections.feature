@@ -4,7 +4,7 @@ Feature: Fold out sections
   I want to hide content in sections that can be folded out
   In order to make courses comprehensible
 
-  Scenario: Add and manipulate fold out sections
+  Background:
     Given the following "courses" exist:
       | fullname | shortname | format |
       | Course 1 | C1        | topics |
@@ -12,6 +12,15 @@ Feature: Fold out sections
     And I am on "Course 1" course homepage with editing mode on
     When I edit the section "0" and I fill the form with:
       | Summary | Hi there [foldout Click here to fold out] This will be exposed first [foldout Another fold outer] Inner hidden bit [/foldout] This also exposed first [/foldout] |
+
+  Scenario: Add multiple foldout sections
+    And I edit the section "1" and I fill the form with:
+      | Summary | Add another [foldout foldout] Section hidden [/foldout] |
+    Then I should not see "Section hidden"
+    When I follow "foldout"
+    Then I should see "Section hidden"
+
+  Scenario: Add and manipulate fold out sections
     Then I should see "Hi there"
     And "Click here to fold out" "link" should be visible
     And I should not see "This will be exposed first"

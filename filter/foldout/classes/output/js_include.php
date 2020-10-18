@@ -15,16 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Class to include javascript manager only once.
  *
- * @package    filter
- * @subpackage foldout
+ * @package    filter_foldout
  * @copyright  2020 Leo Auri <code@leoauri.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace filter_foldout\output;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020101800;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2019111800;        // Requires this Moodle version
-$plugin->component = 'filter_foldout'; // Full name of the plugin (used for diagnostics)
+class js_include {
+    private static $instantiated = false;
+
+    public static function include_javascript() {
+        if (self::$instantiated == true) {
+            return;
+        }
+
+        global $PAGE;
+        $PAGE->requires->js_call_amd('filter_foldout/foldout_manager', 'init');
+
+        self::$instantiated = true;
+    }
+}
